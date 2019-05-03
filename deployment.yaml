@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-poc
+spec:
+  selector:
+    matchLabels:
+      app: kube-poc
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: kube-poc
+    spec:
+      containers:
+      - name: kube-poc
+        image: kubepoc.azurecr.io/webapp/kube-poc:1
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: kube-poc-creds
